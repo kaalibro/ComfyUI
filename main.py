@@ -231,9 +231,12 @@ def hijack_progress(server_instance):
 
 
 def cleanup_temp():
-    temp_dir = folder_paths.get_temp_directory()
-    if os.path.exists(temp_dir):
-        shutil.rmtree(temp_dir, ignore_errors=True)
+    if args.disable_temp_cleanup:
+        return
+    else:
+        temp_dir = folder_paths.get_temp_directory()
+        if os.path.exists(temp_dir):
+            shutil.rmtree(temp_dir, ignore_errors=True)
 
 
 def start_comfyui(asyncio_loop=None):
